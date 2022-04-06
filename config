@@ -281,3 +281,4 @@ bindsym $mod+Pause exec i3lock -c 000000 && systemctl suspend
 bindsym Pause exec i3lock -c 000000 
 
 
+# sudo timedatectl set-ntp true
