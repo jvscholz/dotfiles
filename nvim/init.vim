@@ -17,6 +17,8 @@ set tabstop=2
 filetype plugin indent on
 syntax on
 
+imap <C-BS> <C-W>
+
 set t_Co=256
 
 lua require('config')
