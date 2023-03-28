@@ -5,6 +5,7 @@ set hidden
 set inccommand=split
 set mouse=a
 set number
+set relativenumber
 set splitbelow splitright
 set title
 set ttimeoutlen=0
@@ -17,8 +18,7 @@ set tabstop=2
 filetype plugin indent on
 syntax on
 
-imap <C-BS> <C-W>
-
 set t_Co=256
 
 lua require('config')
+lua require('remap')
