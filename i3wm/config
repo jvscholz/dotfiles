@@ -248,7 +248,7 @@ mode "$mode_gaps_outer" {
 
 bindsym $mod+z exec rofi -show run -lines 20 -eh 1.3 -opacity "85" -bw 0 -font "System San Francisco Display 10"
 
-exec_always feh --bg-fill /home/j/Pictures/wallpaper.jpg
+exec_always feh --bg-scale /home/j/Pictures/wallpaper.jpg
 
 
 # Sreen brightness controls
@@ -261,7 +261,6 @@ bindsym XF86MonBrightnessUp exec brightnessctl s +5%
 
 
 exec --no-startup-id i3-msg 'workspace 1:Web; exec /usr/bin/firefox'
-exec --no-startup-id i3-msg 'workspace 2: exec /usr/bin/kitty'
 
 exec_always --no-startup-id picom --config /home/j/.config/i3/picom.conf
 exec_always --no-startup-id twmnd 
@@ -280,9 +279,11 @@ exec --no-startup-id /home/j/.config/i3/i3-battery-popup -L 20 for_window [title
 
 # autolock
 exec --no-startup-id xautolock -corners -000 -time 10 -locker 'i3lock -c 000000' &
-bindsym Shift+$mod+Home exec i3lock -c 000000 && systemctl suspend
-bindsym $mod+Home exec i3lock -c 000000 
+bindsym Shift+$mod+Pause exec i3lock -c 000000 && systemctl suspend
+bindsym $mod+Pause exec i3lock -c 000000 
 
+exec --no-startup-id /usr/bin/setxkbmap -option "ctrl:nocaps"
 
 # sudo timedatectl set-ntp true
+
 
