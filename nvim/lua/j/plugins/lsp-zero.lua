@@ -13,7 +13,18 @@ return {
   {
     'williamboman/mason.nvim',
     lazy = false,
+    opts = {
+      auto_install = true,
+    },
     config = true,
+  },
+
+  -- snippets
+  {
+  	"L3MON4D3/LuaSnip",
+    dependencies = {
+      'saadparwaiz1/cmp_luasnip',
+      'rafamadriz/friendly-snippets' },
   },
 
   -- Autocompletion
@@ -32,8 +43,14 @@ return {
       local cmp = require('cmp')
       local cmp_action = lsp_zero.cmp_action()
 
+      require("luasnip.loaders.from_vscode").lazy_load()
+
       cmp.setup({
         formatting = lsp_zero.cmp_format({details = true}),
+        sources = {
+          {name = 'nvim_lsp'},
+          {name = 'luasnip'},
+          },
         mapping = cmp.mapping.preset.insert({
           ['<C-Space>'] = cmp.mapping.complete(),
           ['<C-u>'] = cmp.mapping.scroll_docs(-4),
