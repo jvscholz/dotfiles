@@ -49,8 +49,7 @@
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
 
-(package! pangu-spacing)
 ;;(unpin! org-roam)
 (package! org-roam-ui
   :recipe (:host github :repo "org-roam/org-roam-ui"))
-
+(package! vterm)

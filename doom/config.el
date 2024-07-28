@@ -45,10 +45,10 @@
 
 (setq org-roam-file-extensions '("org"))
 
-(use-package! pangu-spacing
-  :ensure t
-  :config
-  (global-pangu-spacing-mode 1))
+;; (use-package! pangu-spacing
+;;   :ensure t
+;;   :config
+;;   (global-pangu-spacing-mode 1))
 
 (setq org-roam-capture-templates
       '(("d" "default" plain "%?"
@@ -89,6 +89,10 @@
         org-roam-ui-follow t
         org-roam-ui-update-on-save t
         org-roam-ui-open-on-start t))
+
+(use-package vterm
+  :ensure t
+  :commands vterm)
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
