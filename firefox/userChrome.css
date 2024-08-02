@@ -1,0 +1,112 @@
+html {
+  --custom-bg: #f5f5f5;
+}
+
+body {
+  background: var(--custom-bg) !important;
+}
+
+html:not([privatebrowsingmode="temporary"]) #navigator-toolbox {
+  padding-top: 3px;
+  padding-bottom: 4px;
+  background: var(--custom-bg) !important;
+  border-bottom: 0 !important;
+}
+
+#nav-bar {
+  background: var(--custom-bg) !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: calc(100% - 20px);
+}
+
+/* Ensure icons are centered within the nav-bar */
+#nav-bar > .nav-bar-inner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+html:not([privatebrowsingmode="temporary"]) #sidebar-box {
+  background: var(--custom-bg) !important;
+}
+
+html:not([privatebrowsingmode="temporary"]) #sidebar-splitter {
+  border: none !important;
+  background: transparent !important;
+  width: 1px !important;
+}
+
+html:not([privatebrowsingmode="temporary"]) #TabsToolbar {
+  visibility: collapse !important;
+}
+
+#TabsToolbar {
+  background: var(--custom-bg) !important;
+}
+
+html:not([privatebrowsingmode="temporary"]) .titlebar-buttonbox-container {
+  position: absolute;
+  right: 0;
+  top: 9px;
+  display: flex;
+  justify-content: center;
+  width: 110px !important;
+}
+
+.titlebar-button {
+  width: 36px !important;
+}
+
+html:not([privatebrowsingmode="temporary"]) #sidebar-header {
+  display: none;
+}
+
+#identity-icon-label {
+  display: none;
+}
+
+#urlbar {
+  left: 50% !important;
+  transform: translateX(-50%);
+  max-width: 960px !important;
+}
+
+#urlbar:not([breakout-extend]) #urlbar-background {
+  background: none !important;
+  background-color: transparent !important;
+}
+
+html:not([privatebrowsingmode="temporary"]) #sidebar-box {
+  --uc-sidebar-width: 60px;
+  --uc-sidebar-hover-width: 360px;
+  position: relative;
+  min-width: var(--uc-sidebar-width) !important;
+  width: var(--uc-sidebar-width) !important;
+  max-width: var(--uc-sidebar-width) !important;
+  z-index: 1;
+}
+
+html:not([privatebrowsingmode="temporary"]) #main-window[sizemode="fullscreen"] #sidebar-box {
+  --uc-sidebar-width: 1px;
+}
+
+html:not([privatebrowsingmode="temporary"]) #sidebar-splitter {
+  display: none;
+}
+
+html:not([privatebrowsingmode="temporary"]) #sidebar {
+  min-width: var(--uc-sidebar-width) !important;
+}
+
+html:not([privatebrowsingmode="temporary"]) #sidebar-box:hover > #sidebar {
+  min-width: var(--uc-sidebar-hover-width) !important;
+}
+
+html:not([privatebrowsingmode="temporary"]) .sidebar-panel {
+  background-color: transparent !important;
+  color: var(--newtab-text-primary-color) !important;
+}
+
