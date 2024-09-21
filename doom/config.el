@@ -85,6 +85,10 @@
         ("g" "Genki Note" plain "%?"
          :if-new (file+head "reference/Genki/${slug}.org"
                             "#+title: ${title}\n#+date: %U\n")
+         :unnarrowed t)
+        ("k" "Tae Kim's Guide to Japanese Grammar" plain "%?"
+         :if-new (file+head "reference/TaeKim/${slug}.org"
+                            "#+title: ${title}\n#+date: %U\n")
          :unnarrowed t)))
 
 (use-package org-roam
