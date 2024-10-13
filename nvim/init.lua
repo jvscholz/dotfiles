@@ -35,6 +35,19 @@ vim.api.nvim_set_keymap('n', '<C-j>', '<C-w>j', { noremap = true, silent = true 
 vim.api.nvim_set_keymap('n', '<C-k>', '<C-w>k', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<C-l>', '<C-w>l', { noremap = true, silent = true })
 
+-- nvim-ale config
+vim.cmd [[
+  let g:ale_linters = {
+      \ 'typescript': ['tsserver'],
+      \ 'typescriptreact': ['tsserver'],
+      \ }
+  let g:ale_fixers = {
+      \ 'typescript': ['prettier'],
+      \ 'typescriptreact': ['prettier'],
+      \ }
+  let g:ale_fix_on_save = 1
+]]
+
 -- telescope binds
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
