@@ -1,0 +1,138 @@
+PLUGIN_DIR="$CONFIG_DIR/plugins"
+
+##### Bar Appearance #####
+sketchybar --bar \
+           position=top \
+           height=38 \
+           blur_radius=0 \
+           color=0xff000000 \
+           padding_left=10 \
+           padding_right=10 \
+           y_offset=0 \
+           margin=0
+
+##### Changing Defaults #####
+default=(
+  padding_left=5
+  padding_right=5
+  background.height=24
+  background.corner_radius=4
+  background.border_width=0
+  icon.font="Symbols Nerd Font Mono:Regular:14.0"
+  icon.color=0xffffffff
+  label.font="SF Pro:Regular:13.0"
+  label.color=0xffffffff
+  label.y_offset=0
+  icon.y_offset=0
+  icon.padding_left=5
+  icon.padding_right=5
+  label.padding_left=5
+  label.padding_right=5
+  align=center
+  background.color=0xff000000
+  background.border_color=0xff000000
+)
+sketchybar --default "${default[@]}"
+
+# Add Apple Menu Item
+sketchybar --add item apple.logo left \
+           --set apple.logo icon= \
+                           icon.font="SF Pro:Black:15.0" \
+                           label.drawing=off \
+                           padding_right=15 \
+                           click_script="sketchybar --trigger apple_menu"
+
+##### Adding Aerospace Workspace Indicators #####
+# Add workspace event handler
+sketchybar --add event aerospace_workspace_change
+
+# Create workspace script
+cat << 'EOF' > "$PLUGIN_DIR/aerospace.sh"
+#!/usr/bin/env bash
+
+if [ "$1" = "$FOCUSED_WORKSPACE" ]; then
+    sketchybar --set $NAME background.drawing=on
+else
+    sketchybar --set $NAME background.drawing=off
+fi
+EOF
+
+chmod +x "$PLUGIN_DIR/aerospace.sh"
+
+# Add workspace indicators
+for sid in $(/opt/homebrew/bin/aerospace list-workspaces --all); do
+    sketchybar --add item space.$sid left \
+        --subscribe space.$sid aerospace_workspace_change \
+        --set space.$sid \
+        background.color=0x44ffffff \
+        background.corner_radius=4 \
+        background.height=20 \
+        background.drawing=off \
+        label="$sid" \
+        click_script="/opt/homebrew/bin/aerospace workspace $sid" \
+        script="$PLUGIN_DIR/aerospace.sh $sid"
+done
+
+##### Adding Front App Item with Nerd Font Icons #####
+cat << 'EOF' > "$PLUGIN_DIR/front_app.sh"
+#!/bin/bash
+
+# Default icon if no match is found
+ICON="ﰊ"
+
+case "$INFO" in
+  "Finder")            ICON="󰀶";;
+  "Firefox")           ICON="";;
+  "Safari")            ICON="";;
+  "Code")              ICON="";;
+  "Terminal")          ICON="";;
+  "kitty")             ICON="";;
+  "Messages")          ICON="";;
+  "Mail")              ICON="";;
+  "Calendar")          ICON="";;
+  "Spotify")           ICON="";;
+  "Discord")           ICON="󰙯";;
+  "Slack")             ICON="";;
+  *)                   ICON="󱓇";;
+esac
+
+sketchybar --set $NAME icon="$ICON" label="$INFO"
+EOF
+
+chmod +x "$PLUGIN_DIR/front_app.sh"
+
+##### Adding Left Items #####
+sketchybar --add item front_app left \
+           --set front_app icon.drawing=on \
+                          label.drawing=on \
+                          script="$PLUGIN_DIR/front_app.sh" \
+           --subscribe front_app front_app_switched
+
+##### Adding Right Items #####
+# Create the clock script with custom format
+cat << 'EOF' > "$PLUGIN_DIR/clock.sh"
+#!/bin/bash
+
+# Format: Month/Day/Year Hour:Minute AM/PM
+DATETIME=$(date '+%m/%d/%Y %I:%M %p')
+sketchybar --set $NAME label="$DATETIME"
+EOF
+
+chmod +x "$PLUGIN_DIR/clock.sh"
+
+sketchybar --add item clock right \
+           --set clock update_freq=10 \
+                      icon=󰅐 \
+                      script="$PLUGIN_DIR/clock.sh" \
+           --add item volume right \
+           --set volume script="$PLUGIN_DIR/volume.sh" \
+                       icon=󰕾 \
+           --subscribe volume volume_change \
+           --add item battery right \
+           --set battery update_freq=120 \
+                        script="$PLUGIN_DIR/battery.sh" \
+                        icon=󰁹 \
+           --subscribe battery system_woke power_source_change
+
+##### Force all scripts to run the first time #####
+sketchybar --update
