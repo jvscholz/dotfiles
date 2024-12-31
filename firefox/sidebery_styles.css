@@ -1,0 +1,95 @@
+#root.root {--tabs-indent: 0px;}
+#root.root {--general-border-radius: 4px;}
+#root.root {--toolbar-bg: ##dcdcdc;}
+#root.root {--frame-bg: #dcdcdc;}
+#root.root {--tabs-height: 32px;}
+#root.root {--tabs-margin: 6px;}
+#root.root {--pinned-tabs-col: 4;}
+#root.root {
+  flex-direction: column;
+}
+
+.NavigationBar .main-items {
+    justify-content: center;
+}
+
+.Tab {
+    min-width: 33px;
+    transition: all ease-in-out 200ms;
+}
+
+.NavigationBar {
+    transition: all ease-in-out 200ms;
+}
+
+.NavigationBar[data-layout="inline"] .main-items .nav-item {
+    transform: translateX(0) !important;
+    position: relative !important;
+    flex-grow: 1;
+    max-width: 66px;
+}
+
+.NavigationBar[data-layout="inline"] .main-items .nav-item[data-active="false"] {
+    display: none;
+}
+
+.BottomBar {
+    display: none;
+}
+
+.Tab .audio, .Tab .title {
+    opacity: 0 !important;
+    transition: ease-in-out 250ms;
+}
+
+.Tab[data-pin="true"] .fav, .Tab[data-pin="true"] .fav-icon {
+    width: 20px;
+    height: 20px;
+}
+
+.Tab[data-pin="false"] .fav, .Tab[data-pin="false"] .fav-icon {
+    width: 18px;
+    height: 18px;
+}
+
+.Tab[data-pin="true"][data-active="true"] .color-layer {
+   background-color: #ffffff !important;
+}
+
+.Tab[data-pin="false"] .color-layer {
+    opacity: 0 !important;
+    border: 0 !important;
+}
+
+.Tab[data-pin="false"][data-active="true"] .body {
+    box-shadow: rgba(17, 17, 26, 0.15) 0px 0px 16px;
+}
+
+.Tab[data-pin="false"] {
+    border: 0 !important;
+}
+
+.Tab .title {
+	background: linear-gradient(90deg, var(--tabs-normal-fg) 80%, #f1f1f100 99%);
+	background-clip: text;
+	color: transparent;
+}
+
+@media screen and (min-width: 350px) {
+  .NavigationBar[data-layout="inline"] .main-items .nav-item[data-active="false"] {
+      display: flex;
+  }
+  .BottomBar {
+      display: flex;
+  }
+  #root.root {
+      --tabs-indent: 14px;
+  }
+  .Tab .audio, .Tab .title {
+      opacity: 1 !important;
+  }
+  #root.root {--tabs-pinned-height: 40px;}
+  #root.root {--tabs-pinned-width: calc((100vw - (var(--tabs-margin) * (var(--pinned-tabs-col) + 1))) / var(--pinned-tabs-col));}
+}
+
+
