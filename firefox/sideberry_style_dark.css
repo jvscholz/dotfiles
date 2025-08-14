@@ -1,0 +1,92 @@
+#root.root {--d-fast: 0.16s;}
+#root.root {--nav-btn-border-radius: 5px;}
+#root.root {--nav-hidden-btn-border-radius: 5px;}
+#root.root {--general-border-radius: 5px;}
+#root.root {--bookmarks-folder-font: 0.9375rem sans-serif;}
+#root.root {--frame-el-overlay-hover-bg: rgba(255,255,255,0.1);}  /* Changed to light overlay for dark theme */
+#root.root {--frame-bg: #222222;}  /* Changed to dark background */
+#root.root {--frame-fg: #ffffff;}  /* Changed to white text */
+#root.root {
+  --tabs-indent: 0px;
+  --general-border-radius: 4px;
+  --toolbar-bg: #222222;    /* Changed to dark background */
+  --frame-bg: #222222;      /* Changed to dark background */
+  --tabs-height: 32px;
+  --tabs-margin: 6px;
+  --pinned-tabs-col: 4;
+  --tabs-normal-fg: #ffffff;  /* Added white text for tabs */
+  --tabs-normal-bg: #222222;  /* Added dark background for tabs */
+  flex-direction: column-reverse;
+}
+.NavigationBar .main-items {
+  justify-content: center;
+}
+.Tab {
+  min-width: 33px;
+  transition: all ease-in-out 200ms;
+  color: #ffffff;  /* White text for tabs */
+}
+.NavigationBar {
+  transition: all ease-in-out 200ms;
+  background-color: #222222;  /* Dark navigation bar */
+}
+.NavigationBar[data-layout="inline"] .main-items .nav-item {
+  transform: translateX(0) !important;
+  position: relative !important;
+  flex-grow: 1;
+  max-width: 66px;
+}
+.NavigationBar[data-layout="inline"] .main-items .nav-item[data-active="false"] {
+  display: none;
+}
+.BottomBar {
+  display: none;
+  background-color: #222222;  /* Dark bottom bar */
+}
+.Tab .audio, .Tab .title {
+  opacity: 0 !important;
+  transition: ease-in-out 250ms;
+  color: #ffffff;  /* White text */
+}
+.Tab[data-pin="true"] .fav, .Tab[data-pin="true"] .fav-icon {
+  width: 20px;
+  height: 20px;
+}
+.Tab[data-pin="false"] .fav, .Tab[data-pin="false"] .fav-icon {
+  width: 18px;
+  height: 18px;
+}
+.Tab[data-pin="true"][data-active="true"] .color-layer {
+  background-color: #333333 !important;  /* Slightly lighter for active state */
+}
+.Tab[data-pin="false"] .color-layer {
+  opacity: 0 !important;
+  border: 0 !important;
+}
+.Tab[data-pin="false"][data-active="true"] .body {
+  box-shadow: rgba(255, 255, 255, 0.15) 0px 0px 16px;  /* Light shadow for dark theme */
+}
+.Tab[data-pin="false"] {
+  border: 0 !important;
+}
+.Tab .title {
+  background: linear-gradient(90deg, #ffffff 80%, #22222200 99%);  /* White to transparent gradient */
+  background-clip: text;
+  color: transparent;
+}
+@media screen and (min-width: 350px) {
+  .NavigationBar[data-layout="inline"] .main-items .nav-item[data-active="false"] {
+      display: flex;
+  }
+  .BottomBar {
+      display: flex;
+  }
+  #root.root {
+      --tabs-indent: 14px;
+      --tabs-pinned-height: 40px;
+      --tabs-pinned-width: calc((100vw - (var(--tabs-margin) * (var(--pinned-tabs-col) + 1))) / var(--pinned-tabs-col));
+  }
+  .Tab .audio, .Tab .title {
+      opacity: 1 !important;
+  }
+}
