@@ -3,21 +3,12 @@ start-at-login = true
 enable-normalization-flatten-containers = true
 enable-normalization-opposite-orientation-for-nested-containers = true
 
-# Run Sketchybar together with AeroSpace
-after-startup-command = ['exec-and-forget sketchybar']
-
-# Notify Sketchybar about workspace change
-exec-on-workspace-change = ['/bin/bash', '-c',
-    'sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE'
-]
-
-# Gaps configuration with increased outer gaps
 [gaps]
 inner.horizontal = 7
 inner.vertical = 7
 outer.left = 20
 outer.bottom = 20
-outer.top = 30   # Larger top gap for menu bar
+outer.top = 15
 outer.right = 20
 
 [key-mapping]
@@ -78,7 +69,7 @@ alt-f = ['mode service', 'layout floating tiling']  # toggle floating
 alt-tab = 'workspace-back-and-forth'
 alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
 
-# Kill window (equivalent to your i3 alt+shift+q)
+# Kill window 
 alt-shift-q = 'close'
 
 # Resize
